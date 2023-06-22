@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>AniVerse</title>
 </head>
 <body>
@@ -57,14 +58,20 @@
                 // You can perform further processing or render the view
             
                 // Example:
-                foreach ($animeList as $anime) {
-                    // Access anime data
-                    $title = $anime['title']['romaji'];
-                    $coverImage = $anime['coverImage']['medium'];
+                $animeChunks = array_chunk($animeList, 5);
+                foreach ($animeChunks as $chunk) {
+                    echo '<div class="row">';
+                    foreach ($chunk as $anime) {
+                        // Access anime data
+                        $title = $anime['title']['romaji'];
+                        $coverImage = $anime['coverImage']['medium'];
             
-                    // Perform desired actions with anime data
-                    echo "Title: $title<br>";
-                    echo "Cover Image: <img src='$coverImage' alt='Cover Image'><br>";
+                        echo '<div class="col-lg-2 col-md-3 col-sm-4 col-6 m-2">';
+                        echo "<h6>$title</h6>";
+                        echo "<img src='$coverImage' alt='Cover Image'><br>";
+                        echo '</div>';
+                    }
+                    echo '</div>';
                 }
             } else {
                 echo 'Failed to retrieve anime data from the API.';
